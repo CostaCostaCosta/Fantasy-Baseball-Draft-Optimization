@@ -3,7 +3,7 @@ The goal of this project is to turn existing projection systems into actionable 
 
 Data sources: fangraphs.com is used extensively for base data. Projection systems such as steamer, atc, as well as their auctiontool are used to create the base data.
 
-The project utilizes Jupyter notebooks, standard anaconda packages, as well as PuLp (pip install pulp).
+The project utilizes Jupyter notebooks, standard anaconda packages (pandas), as well as PuLp (pip install pulp).
 
 What is done:
 Salary Points League - Leagues without a draft, and all players are available at a fixed cost.
