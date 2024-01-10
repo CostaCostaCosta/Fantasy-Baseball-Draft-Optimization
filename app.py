@@ -3,7 +3,10 @@ import ipdb
 
 def run_app():
     # Create an object of the class and run the process
-    analysis = RotoLeagueAnalysis('fg_hitter_2024.csv', 'fg_pitcher_2024.csv', adp_limit=270)
+    analysis = RotoLeagueAnalysis(salary_cap=200, 
+                                hitter_file_name='fg_hitter_2024.csv', 
+                                pitcher_file_name='fg_pitcher_2024.csv',
+                                adp_limit=270)
     analysis.preprocess()
     analysis.draft()
 

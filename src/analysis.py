@@ -10,10 +10,11 @@ class RotoLeagueAnalysis:
     This class is used for analyzing RotoLeague data. 
     It includes various methods to process hitter and pitcher data.
     """
-    def __init__(self, hitter_file_name, pitcher_file_name, adp_limit=300):
+    def __init__(self, salary_cap, hitter_file_name, pitcher_file_name, adp_limit=300):
       """
       Initialize the class with hitter file, pitcher file and adp limit.
       """
+      self.salary_cap = salary_cap
       self.hitter_file_name = hitter_file_name
       self.pitcher_file_name = pitcher_file_name
       self.adp_limit = adp_limit
@@ -61,9 +62,19 @@ class RotoLeagueAnalysis:
         for pos in positionOrder:
             self.df_hitter.loc[self.df_hitter['PP'].str.contains(pos), 'PP'] = pos
 
+        # limit the input values to four decimal places for limited precision
+        self.df_hitter = self.df_hitter.round(4)
+
+        # adjust position bonus (aPos) relative to the mean for everyone but catchers
+        apos_mean = self.df_hitter.loc[self.df_hitter['PP'] != 'C', 'aPOS'].mean()
+        self.df_hitter.loc[self.df_hitter['PP'] != 'C', 'aPOS'] = apos_mean
+
+        # Add Cost column if it does not exist, or fill null values with 0 if it does
         if 'Cost' not in self.df_hitter.columns:
             self.df_hitter['Cost'] = 0
-
+        else:
+            self.df_hitter['Cost'].fillna(0, inplace=True)
+    
         # Reset the index for df_hitter
         self.df_hitter = self.df_hitter.reset_index(drop=True)
 
@@ -100,7 +111,7 @@ class RotoLeagueAnalysis:
         """
         This method runs the draft process using the processed data.
         """
-        my_team = draft.live_draft(10, self.df_hitter)
+        my_team = draft.live_draft(10, self.salary_cap, self.df_hitter)
         return my_team
 
 
