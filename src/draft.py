@@ -1,5 +1,5 @@
 import pandas as pd
-import src.optimizer as optimizer
+import src.opti.optimizer as optimizer
 import ipdb
 
 def get_player(df, player_name):

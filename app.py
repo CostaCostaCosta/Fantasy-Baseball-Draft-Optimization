@@ -8,7 +8,8 @@ def run_app():
                                 pitcher_file_name='fg_pitcher_2024.csv',
                                 adp_limit=270)
     analysis.preprocess()
-    analysis.draft()
+    analysis.genetic()
+    # analysis.draft()
 
 if __name__ == "__main__":
     run_app()

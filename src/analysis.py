@@ -4,6 +4,7 @@ import io
 import os
 import ipdb
 import src.draft as draft
+import src.opti.genetic as genetic
 
 class RotoLeagueAnalysis:
     """
@@ -99,6 +100,7 @@ class RotoLeagueAnalysis:
         # Reset the index for df_pitcher
         self.df_pitcher = self.df_pitcher.reset_index(drop=True)
     
+
     def preprocess(self):
         """
         This method runs the whole process of uploading and processing data.
@@ -107,11 +109,17 @@ class RotoLeagueAnalysis:
         self.process_hitter_data()
         self.process_pitcher_data()
 
+
     def draft(self):
         """
         This method runs the draft process using the processed data.
         """
         my_team = draft.live_draft(10, self.salary_cap, self.df_hitter)
         return my_team
-
+    
+    
+    def genetic(self):
+        best_ind, best_fitness = genetic.genetic_optimizer(self.df_hitter, self.salary_cap)
+        print(best_ind, best_fitness)
+        return None
 

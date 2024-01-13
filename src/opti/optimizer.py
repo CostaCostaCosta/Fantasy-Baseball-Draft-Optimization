@@ -65,7 +65,6 @@ def optimize_hitter_lineup(df, salary_cap):
     player_in_lineup = pulp.LpVariable.dicts("Players", NUM_PLAYERS, 0, 1, cat="Binary")
 
     # Create objective: maximize sum of player points
-    # problem += pulp.lpSum(player_in_lineup[i] * sum(scipy.stats.cauchy.cdf(player_stats[stat][i]) for stat in player_stats) for i in NUM_PLAYERS)
     problem += pulp.lpSum(player_in_lineup[i] * sum((player_stats[stat][i]) for stat in player_stats) for i in NUM_PLAYERS)
     
     # Constraint: Sum of player dollars must be less than or equal to the salary cap
