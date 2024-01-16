@@ -18,7 +18,7 @@ def hitter_constraints(problem, df, player_in_lineup, NUM_PLAYERS):
             problem += player_in_lineup[i] == 1
 
     # Constraint: Teams must have X players drafted (4 flyers + catcher)
-    problem += pulp.lpSum(player_in_lineup) == 8
+    problem += pulp.lpSum(player_in_lineup) == 6
 
     # Positional constraints
     positions = ['C', '1B', '2B', '3B', 'SS', 'OF']
@@ -78,14 +78,14 @@ def optimize_hitter_lineup(df, salary_cap):
     predicted = []
 
     if problem.solve(pulp.PULP_CBC_CMD(msg=False)) == 1:
-        print("Current Optimal Lineup")
+        print("Linear Optimal Lineup")
         for pos in NUM_PLAYERS:
             if player_in_lineup[pos].value() == 1:
                 predicted.append(df['PlayerName'][pos])
                 cost += player_costs[pos]
                 points += player_points[pos]
-                print(f'{df["PlayerName"][pos]:25s}, Position = {df["POS"][pos]:2s},Price = {player_costs[pos]:5.2f}, Points = {player_points[pos]:3.2f}')
-        print(f'\nTotal Team Cost: {int(cost):5d}\nTotal Team Points: {points:5.2f}')
+                # print(f'{df["PlayerName"][pos]:25s}, Position = {df["POS"][pos]:2s},Price = {player_costs[pos]:5.2f}, Points = {player_points[pos]:3.2f}')
+        # print(f'\Linear Team Cost: {int(cost):5d}\nLinear Team Points: {points:5.2f}')
     else:
         print('Error finding solution')
 

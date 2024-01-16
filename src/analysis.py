@@ -70,7 +70,10 @@ class RotoLeagueAnalysis:
         apos_mean = self.df_hitter.loc[self.df_hitter['PP'] != 'C', 'aPOS'].mean()
         self.df_hitter.loc[self.df_hitter['PP'] != 'C', 'aPOS'] = apos_mean
 
-        # Add Cost column if it does not exist, or fill null values with 0 if it does
+        # Set a 1 dollar floor for 'Dollars'
+        self.df_hitter['Dollars'] = self.df_hitter['Dollars'].clip(lower=1)
+
+        # Add Cost column if it does not exist, or fill null valu es with 0 if it does
         if 'Cost' not in self.df_hitter.columns:
             self.df_hitter['Cost'] = 0
         else:
@@ -120,6 +123,13 @@ class RotoLeagueAnalysis:
     
     def genetic(self):
         best_ind, best_fitness = genetic.genetic_optimizer(self.df_hitter, self.salary_cap)
-        print(best_ind, best_fitness)
-        return None
-
+        best_lineup = self.df_hitter.loc[best_ind]
+        # Print "Genetic Best Lineup"
+        print(f"Genetic Best Lineup:\n{best_lineup}")
+        # Print "Genetic Lineup Cost"
+        print(f"Genetic Lineup Cost: {best_lineup['Dollars'].sum():.2f}")
+        stat_totals = best_lineup[best_lineup.columns[best_lineup.columns.str.startswith('m')]].sum()
+        total_sum = round(stat_totals.sum(), 2)
+        print(f"{stat_totals.round(2)}, Linear Sum: {total_sum}")
+        print(f"Fitness Score: {best_fitness.round(3)}")
+        return best_lineup, best_fitness, stat_totals, total_sum
