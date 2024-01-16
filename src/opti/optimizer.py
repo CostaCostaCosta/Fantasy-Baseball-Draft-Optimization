@@ -18,7 +18,7 @@ def hitter_constraints(problem, df, player_in_lineup, NUM_PLAYERS):
             problem += player_in_lineup[i] == 1
 
     # Constraint: Teams must have X players drafted (4 flyers + catcher)
-    problem += pulp.lpSum(player_in_lineup) == 6
+    problem += pulp.lpSum(player_in_lineup) == 8
 
     # Positional constraints
     positions = ['C', '1B', '2B', '3B', 'SS', 'OF']

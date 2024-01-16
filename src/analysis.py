@@ -122,7 +122,7 @@ class RotoLeagueAnalysis:
     
     
     def genetic(self):
-        best_ind, best_fitness = genetic.genetic_optimizer(self.df_hitter, self.salary_cap)
+        best_ind, best_fitness = genetic.genetic_optimizer(self.df_hitter.copy(), self.salary_cap)
         best_lineup = self.df_hitter.loc[best_ind]
         # Print "Genetic Best Lineup"
         print(f"Genetic Best Lineup:\n{best_lineup}")

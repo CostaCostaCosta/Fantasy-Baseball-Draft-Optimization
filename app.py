@@ -3,7 +3,10 @@ import pandas as pd
 import datetime
 import ipdb
 
+from multiprocessing import Pool
+
 from src.analysis import RotoLeagueAnalysis
+
 def run_app():
     # Create an object of the class and run the process
     analysis = RotoLeagueAnalysis(salary_cap=200, 
@@ -16,13 +19,13 @@ def run_app():
     genetic_df = pd.DataFrame()
     
     # iterate over the range
-    for i in range(50):
+    for i in range(3):
         best_lineup, best_fitness, stat_totals, total_sum = analysis.genetic()
-        best_names = best_lineup['PlayerName'].values.tobytes()
+        best_names = ', '.join(best_lineup['PlayerName'].values)
         # create a dictionary for the current run
         current_run_data = {
             'best_lineup': best_names,
-            'best_fitness': best_fitness,
+            'best_fitness': best_fitness.round(4),
             'stat_totals': stat_totals,
             'total_sum': total_sum
         }
