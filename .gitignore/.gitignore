@@ -1,9 +1,0 @@
-The code provided already does exactly what you're asking for. It's set to ignore all .csv and .pyc files. However, if you want to ignore .pyc files and .csv files globally, not only in the root directory, you can modify it like this:
-
-```gitignore
-# Ignore Python compiled files
-**/*.pyc
-**/*.csv
-
-# Ignore __pycache__ folder in src
-src/__pycache__/
