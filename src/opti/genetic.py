@@ -29,24 +29,6 @@ def make_fitness_function(df, salary_cap):
 
         return total_stats - penalty,
 
-    # def fitness_function(individual):
-    #     selected_df = df.iloc[individual]
-    #     total_A = sum(scipy.stats.cauchy.cdf(selected_df['mAVG']))
-    #     total_B = sum(scipy.stats.cauchy.cdf(selected_df['mSB']))
-    #     total_salary = sum(selected_df['Dollars'])  # assuming 'Salary' is the column in df that contains the salaries
-
-    #     # calculate penalty for exceeding salary cap
-    #     if total_salary > salary_cap:
-    #         penalty = (total_salary - salary_cap) * 0.1  # adjust the penalty rate as needed
-    #     else:
-    #         penalty = 0
-        
-    #     # calculate penalty for repeating players in individual
-    #     if len(individual) != len(set(individual)):
-    #         penalty += 10
-            
-
-    #     return total_A + total_B - penalty,
     return fitness_function
 
 
@@ -115,7 +97,7 @@ def generate_initial_population(df, population_size, salary_cap):
     return population
 
 
-def genetic_optimizer(df, salary_cap, initial_population_size=500, ngen=100):
+def genetic_optimizer(df, salary_cap, initial_population_size=500, ngen=500):
     if "FitnessMax" not in dir(creator):
         creator.create("FitnessMax", base.Fitness, weights=(1.0,))
     if "Individual" not in dir(creator):

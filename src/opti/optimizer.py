@@ -9,16 +9,13 @@ def hitter_constraints(problem, df, player_in_lineup, NUM_PLAYERS):
     """
     Set the hitter constraints for the linear programming problem.
     """
-    print("NUM_PLAYERS length:", len(NUM_PLAYERS))
-    print("player_in_lineup length:", len(player_in_lineup))
-   
     # Constraint: Any player with 'Cost' > 0 must be in the lineup
     for i in NUM_PLAYERS:
         if df.iloc[i]['Cost'] > 0:
             problem += player_in_lineup[i] == 1
 
     # Constraint: Teams must have X players drafted (4 flyers + catcher)
-    problem += pulp.lpSum(player_in_lineup) == 8
+    problem += pulp.lpSum(player_in_lineup) == 6
 
     # Positional constraints
     positions = ['C', '1B', '2B', '3B', 'SS', 'OF']

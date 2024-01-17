@@ -19,7 +19,7 @@ def run_app():
     genetic_df = pd.DataFrame()
     
     # iterate over the range
-    for i in range(3):
+    for i in range(5):
         best_lineup, best_fitness, stat_totals, total_sum = analysis.genetic()
         best_names = ', '.join(best_lineup['PlayerName'].values)
         # create a dictionary for the current run
@@ -33,7 +33,7 @@ def run_app():
         # use concat instead of append to add the current run data to df_genetic
         genetic_df = pd.concat([genetic_df, current_run_df])
     
-    unique_filename = "df_genetic_" + datetime.datetime.now().strftime("%Y%m%d%H%M%S") + ".csv"
+    unique_filename = "/genetic_output/df_genetic_" + datetime.datetime.now().strftime("%Y%m%d%H%M%S") + ".csv"
     genetic_df.to_csv(unique_filename, index=False)
 
 
