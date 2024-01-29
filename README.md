@@ -31,13 +31,13 @@ This mode operates within the league-specific constraints, ensuring your team co
 Dive into the complexity of non-linear optimization with our Genetic Algorithm Exploration. This approach adds a new dimension to your team-building strategy.
 
 ### 🌀 The Cauchy CDF Twist
-Each stat is intricately analyzed through the lens of the Cauchy Cumulative Distribution Function (CDF), offering a nuanced perspective for evaluating team compositions.
+Each stat is scaled by Cauchy Cumulative Distribution Function (CDF), offering a more balanced perspective for roster construction. 
 
 ```math
 f(x; x_0, γ) = \frac{1}{\pi γ [1 + (\frac{x - x_0}{γ})^2]}
 ```
 
-`x_0` and `γ` represent the location and scale parameters, introducing a sophisticated layer to the evaluation process.
+`x_0` and `γ` represent the location and scale parameters. 
 
 ### 🧠 Challenges in Genetic Algorithm
 - **Complexity**: Navigating through the non-linear nature of the algorithm.
