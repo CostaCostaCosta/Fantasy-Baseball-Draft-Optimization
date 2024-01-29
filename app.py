@@ -6,7 +6,7 @@ from src.analysis import RotoLeagueAnalysis
 def run_app(args):
     # Create an object of the class
     analysis = RotoLeagueAnalysis(salary_cap=args.salary_cap, 
-                                  draft_picks=10,
+                                  draft_picks=args.draft_picks,
                                   hitter_file_name=args.hitter_file, 
                                   pitcher_file_name=args.pitcher_file,
                                   adp_limit=args.adp_limit)
