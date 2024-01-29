@@ -75,7 +75,7 @@ def controlled_mutation(individual, df, num_players_to_mutate, salary_cap):
 def generate_initial_population(df, population_size, salary_cap):
     population = []
     # Generate feasible individual using the linear optimizer
-    feasible_individual_names = linear_optimizer.optimize_hitter_lineup(df, salary_cap)[0]
+    feasible_individual_names = linear_optimizer.optimize_hitter_lineup(df, salary_cap, verbose=False)[0]
 
     # find index of feasible_individual_names in df and set feasible_individual to a list of these values
     feasible_individual = creator.Individual(df[df['PlayerName'].isin(feasible_individual_names)].index.tolist())

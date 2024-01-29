@@ -30,7 +30,7 @@ def hitter_constraints(problem, df, player_in_lineup, NUM_PLAYERS):
     return problem
 
 
-def optimize_hitter_lineup(df, salary_cap):
+def optimize_hitter_lineup(df, salary_cap, verbose=True):
     """
     Function to optimize the selection of players for a fantasy baseball game using linear programming.
     
@@ -81,8 +81,9 @@ def optimize_hitter_lineup(df, salary_cap):
                 predicted.append(df['PlayerName'][pos])
                 cost += player_costs[pos]
                 points += player_points[pos]
-                # print(f'{df["PlayerName"][pos]:25s}, Position = {df["POS"][pos]:2s},Price = {player_costs[pos]:5.2f}, Points = {player_points[pos]:3.2f}')
-        # print(f'\Linear Team Cost: {int(cost):5d}\nLinear Team Points: {points:5.2f}')
+                if verbose:
+                    print(f'{df["PlayerName"][pos]:25s}, Position = {df["POS"][pos]:2s},Price = {player_costs[pos]:5.2f}, Points = {player_points[pos]:3.2f}')
+        print(f'\Linear Team Cost: {int(cost):5d}\nLinear Team Points: {points:5.2f}')
     else:
         print('Error finding solution')
 
