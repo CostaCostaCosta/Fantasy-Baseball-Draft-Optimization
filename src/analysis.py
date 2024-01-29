@@ -11,11 +11,12 @@ class RotoLeagueAnalysis:
     This class is used for analyzing RotoLeague data. 
     It includes various methods to process hitter and pitcher data.
     """
-    def __init__(self, salary_cap, hitter_file_name, pitcher_file_name, adp_limit=300):
+    def __init__(self, salary_cap, draft_picks, hitter_file_name, pitcher_file_name, adp_limit=300):
       """
       Initialize the class with hitter file, pitcher file and adp limit.
       """
       self.salary_cap = salary_cap
+      self.draft_picks = draft_picks
       self.hitter_file_name = hitter_file_name
       self.pitcher_file_name = pitcher_file_name
       self.adp_limit = adp_limit
@@ -117,7 +118,7 @@ class RotoLeagueAnalysis:
         """
         This method runs the draft process using the processed data.
         """
-        my_team = draft.live_draft(10, self.salary_cap, self.df_hitter)
+        my_team = draft.live_draft(self.draft_picks, self.salary_cap, self.df_hitter)
         return my_team
     
     

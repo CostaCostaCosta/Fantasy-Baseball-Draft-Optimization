@@ -97,7 +97,7 @@ def generate_initial_population(df, population_size, salary_cap):
     return population
 
 
-def genetic_optimizer(df, salary_cap, initial_population_size=500, ngen=500):
+def genetic_optimizer(df, salary_cap, initial_population_size=1000, ngen=100):
     if "FitnessMax" not in dir(creator):
         creator.create("FitnessMax", base.Fitness, weights=(1.0,))
     if "Individual" not in dir(creator):
