@@ -10,10 +10,10 @@ Welcome to the Fantasy Baseball Optimization Project, an adventurous exploration
 ## Live Draft Mode (Linear Optimization)
 
 ### 📊 Base Objective Function
-In the Live Draft Mode, we address the optimization problem using linear strategies, perfectly tailored to fit the unique constraints of your fantasy league. Our objective function is elegantly formulated as:
+In the Live Draft Mode, we address the optimization problem using linear strategies, perfectly tailored to fit the unique constraints of your fantasy league. Our simple base objective function is:
 
 ```math
-Objective Function = ∑_{i=1}^{n} z_i
+Objective Function = max ∑_{i=1}^{n} z_i
 ```
 
 Here, `z_i` represents the z-score for each statistical category, transforming diverse stats into a universal measure of performance. It's all about finding the perfect balance in your fantasy team's statistical portfolio.
